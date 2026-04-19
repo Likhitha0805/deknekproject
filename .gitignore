@@ -1,0 +1,6 @@
+/backend/target/
+*.class
+.idea/
+.vscode/
+*.log
+node_modules/
