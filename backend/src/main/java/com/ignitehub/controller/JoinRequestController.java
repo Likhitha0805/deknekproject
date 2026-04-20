@@ -1,18 +1,19 @@
-package com.launchpad.controller;
+package com.ignitehub.controller;
 
-import com.launchpad.model.JoinRequest;
-import com.launchpad.model.Project;
-import com.launchpad.model.User;
-import com.launchpad.repository.JoinRequestRepository;
-import com.launchpad.repository.ProjectRepository;
-import com.launchpad.repository.UserRepository;
-import com.launchpad.security.services.UserDetailsImpl;
+import com.ignitehub.model.JoinRequest;
+import com.ignitehub.model.Project;
+import com.ignitehub.model.User;
+import com.ignitehub.repository.JoinRequestRepository;
+import com.ignitehub.repository.ProjectRepository;
+import com.ignitehub.repository.UserRepository;
+import com.ignitehub.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -30,8 +31,23 @@ public class JoinRequestController {
     @PostMapping("/apply/{projectId}")
     public ResponseEntity<?> applyToProject(@PathVariable Long projectId) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User applicant = userRepository.findById(userDetails.getId()).orElseThrow();
         Project project = projectRepository.findById(projectId).orElseThrow();
+
+        // 1. Restrict owner from applying to their own project
+        if (project.getOwner().getId().equals(userDetails.getId())) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Error: You cannot apply to your own project!"));
+        }
+
+        // 2. Prevent duplicate applications
+        List<JoinRequest> existingRequests = joinRequestRepository.findByApplicantId(userDetails.getId());
+        boolean alreadyApplied = existingRequests.stream()
+                .anyMatch(r -> r.getProject().getId().equals(projectId));
+        
+        if (alreadyApplied) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Error: You have already applied to this project!"));
+        }
+
+        User applicant = userRepository.findById(userDetails.getId()).orElseThrow();
 
         JoinRequest request = new JoinRequest();
         request.setApplicant(applicant);

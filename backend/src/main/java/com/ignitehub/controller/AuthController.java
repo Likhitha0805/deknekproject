@@ -1,9 +1,9 @@
-package com.launchpad.controller;
+package com.ignitehub.controller;
 
-import com.launchpad.model.User;
-import com.launchpad.repository.UserRepository;
-import com.launchpad.security.jwt.JwtUtils;
-import com.launchpad.security.services.UserDetailsImpl;
+import com.ignitehub.model.User;
+import com.ignitehub.repository.UserRepository;
+import com.ignitehub.security.jwt.JwtUtils;
+import com.ignitehub.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,8 +1,8 @@
-package com.launchpad.security;
+package com.ignitehub.security;
 
-import com.launchpad.security.jwt.AuthEntryPointJwt;
-import com.launchpad.security.jwt.AuthTokenFilter;
-import com.launchpad.security.services.UserDetailsServiceImpl;
+import com.ignitehub.security.jwt.AuthEntryPointJwt;
+import com.ignitehub.security.jwt.AuthTokenFilter;
+import com.ignitehub.security.services.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,4 +1,4 @@
-package com.launchpad.model;
+package com.ignitehub.model;
 
 import jakarta.persistence.*;
 

@@ -8,10 +8,10 @@
 		<version>4.0.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.launchpad</groupId>
-	<artifactId>launchpad</artifactId>
+	<groupId>com.ignitehub</groupId>
+	<artifactId>ignitehub</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>launchpad</name>
+	<name>ignitehub</name>
 	<description/>
 	<url/>
 	<licenses>

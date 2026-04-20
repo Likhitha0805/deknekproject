@@ -1,4 +1,4 @@
-package com.launchpad.security.jwt;
+package com.ignitehub.security.jwt;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

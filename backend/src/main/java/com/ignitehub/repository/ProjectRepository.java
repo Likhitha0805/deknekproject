@@ -1,6 +1,6 @@
-package com.launchpad.repository;
+package com.ignitehub.repository;
 
-import com.launchpad.model.Project;
+import com.ignitehub.model.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

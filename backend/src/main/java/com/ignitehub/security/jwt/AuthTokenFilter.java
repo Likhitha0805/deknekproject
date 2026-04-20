@@ -1,6 +1,6 @@
-package com.launchpad.security.jwt;
+package com.ignitehub.security.jwt;
 
-import com.launchpad.security.services.UserDetailsServiceImpl;
+import com.ignitehub.security.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

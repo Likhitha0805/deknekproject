@@ -1,10 +1,10 @@
-package com.launchpad;
+package com.ignitehub;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LaunchpadApplicationTests {
+class IgniteHubApplicationTests {
 
 	@Test
 	void contextLoads() {

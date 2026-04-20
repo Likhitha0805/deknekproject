@@ -1,7 +1,7 @@
-package com.launchpad.security.services;
+package com.ignitehub.security.services;
 
-import com.launchpad.model.User;
-import com.launchpad.repository.UserRepository;
+import com.ignitehub.model.User;
+import com.ignitehub.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

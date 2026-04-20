@@ -1,4 +1,4 @@
-const API_URL = 'https://deknekproject-production.up.railway.app/api';
+const API_URL = 'http://localhost:8080/api';
 
 class ApiService {
     static getToken() {

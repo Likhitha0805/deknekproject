@@ -1,6 +1,6 @@
-package com.launchpad.security.jwt;
+package com.ignitehub.security.jwt;
 
-import com.launchpad.security.services.UserDetailsImpl;
+import com.ignitehub.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -14,10 +14,10 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    @Value("${launchpad.app.jwtSecret}")
+    @Value("${ignitehub.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${launchpad.app.jwtExpirationMs}")
+    @Value("${ignitehub.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {

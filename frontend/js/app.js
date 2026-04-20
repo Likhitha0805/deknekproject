@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     ${project.techStack.split(',').map(tech => `<span class="tech-badge">${tech.trim()}</span>`).join('')}
                 </div>
                 ${ApiService.isAuthenticated() ? 
-                    `<button class="btn-primary w-100" onclick="applyToProject(${project.id})">Request to Join</button>` : 
+                    (ApiService.getUser()?.id === project.owner.id ? 
+                        `<button class="btn-primary w-100" disabled style="opacity: 0.5; cursor: not-allowed">Your Project</button>` :
+                        `<button class="btn-primary w-100" onclick="applyToProject(${project.id})">Request to Join</button>`
+                    ) : 
                     `<p class="text-muted" style="font-size:0.85rem"><a href="auth.html" style="color:var(--primary)">Sign in</a> to apply</p>`
                 }
             </div>
