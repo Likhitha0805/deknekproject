@@ -2,7 +2,7 @@
 
 IgniteHub is a modern, full-stack developer collaboration platform. It allows developers to showcase their projects, find teammates, and manage collaboration requests in a sleek, animated interface.
 
-![IgniteHub Preview](https://via.placeholder.com/800x400?text=IgniteHub+Collaboration+Platform)
+
 
 ## 🚀 Features
 
@@ -76,9 +76,7 @@ IgniteHub is a modern, full-stack developer collaboration platform. It allows de
 
 ---
 
-## 📸 Screenshots
 
-*(Add your screenshots here to make your profile stand out!)*
 
 ## 🤝 Contributing
 Contributions are welcome! Feel free to open an issue or submit a pull request.
