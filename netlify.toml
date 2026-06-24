@@ -1,0 +1,10 @@
+[build]
+  # No build command needed — just serve the static files
+  command = "echo 'No build needed'"
+  publish = "backend/src/main/resources/static"
+
+# Redirect all unknown routes to index.html for SPA-like behavior
+[[redirects]]
+  from = "/*"
+  to = "/splash.html"
+  status = 200
