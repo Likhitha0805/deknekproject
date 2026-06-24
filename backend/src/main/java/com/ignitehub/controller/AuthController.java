@@ -41,11 +41,16 @@ public class AuthController {
         String jwt = jwtUtils.generateJwtToken(authentication);
         
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow();
 
         Map<String, Object> response = new HashMap<>();
         response.put("token", jwt);
         response.put("id", userDetails.getId());
         response.put("email", userDetails.getEmail());
+        response.put("name", user.getName());
+        response.put("role", user.getRole());
+        response.put("skills", user.getSkills());
+        response.put("githubUrl", user.getGithubUrl() != null ? user.getGithubUrl() : "");
 
         return ResponseEntity.ok(response);
     }
@@ -58,9 +63,14 @@ public class AuthController {
                     .body(Map.of("message", "Error: Email is already in use!"));
         }
 
+        String role = "USER";
+        String skills = "";
+
         User user = new User(signUpRequest.get("name"), 
                              signUpRequest.get("email"),
-                             encoder.encode(signUpRequest.get("password")));
+                             encoder.encode(signUpRequest.get("password")),
+                             role,
+                             skills);
 
         userRepository.save(user);
 

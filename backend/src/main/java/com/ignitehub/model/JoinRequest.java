@@ -1,5 +1,6 @@
 package com.ignitehub.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,10 +13,12 @@ public class JoinRequest {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id", nullable = false)
+    @JsonIgnoreProperties({"owner", "hibernateLazyInitializer", "handler"})
     private Project project;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "applicant_id", nullable = false)
+    @JsonIgnoreProperties({"password", "hibernateLazyInitializer", "handler"})
     private User applicant;
 
     @Column(nullable = false)

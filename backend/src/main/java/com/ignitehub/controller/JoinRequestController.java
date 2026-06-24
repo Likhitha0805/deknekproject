@@ -28,6 +28,9 @@ public class JoinRequestController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    com.ignitehub.repository.NotificationRepository notificationRepository;
+
     @PostMapping("/apply/{projectId}")
     public ResponseEntity<?> applyToProject(@PathVariable Long projectId) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -85,8 +88,21 @@ public class JoinRequestController {
             return ResponseEntity.status(403).body("Unauthorized");
         }
         
-        request.setStatus(body.get("status"));
+        String newStatus = body.get("status");
+        request.setStatus(newStatus);
         joinRequestRepository.save(request);
+
+        // Generate Notification
+        try {
+            com.ignitehub.model.Notification notification = new com.ignitehub.model.Notification(
+                request.getApplicant(),
+                "Your request to join '" + request.getProject().getTitle() + "' has been " + newStatus.toLowerCase() + "!"
+            );
+            notificationRepository.save(notification);
+        } catch (Exception e) {
+            System.err.println("Failed to create notification: " + e.getMessage());
+        }
+        
         return ResponseEntity.ok(request);
     }
 }

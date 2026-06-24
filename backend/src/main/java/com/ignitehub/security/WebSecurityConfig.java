@@ -65,6 +65,7 @@ public class WebSecurityConfig {
                 auth.requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/projects").permitAll()
                     .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                    .requestMatchers("/", "/*.html", "/css/**", "/js/**").permitAll()
                     .anyRequest().authenticated()
             );
 

@@ -27,6 +27,43 @@ public class ProjectController {
         return projectRepository.findAll();
     }
 
+    @GetMapping("/recommended")
+    public List<Project> getRecommendedProjects() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findById(userDetails.getId()).orElseThrow();
+        String skillsStr = user.getSkills();
+        
+        List<Project> allProjects = projectRepository.findAll();
+        if (skillsStr == null || skillsStr.trim().isEmpty()) {
+            return allProjects;
+        }
+
+        // Parse user skills
+        String[] userSkills = skillsStr.split(",");
+        for (int i = 0; i < userSkills.length; i++) {
+            userSkills[i] = userSkills[i].trim().toLowerCase();
+        }
+
+        // Filter projects: return projects where requirements are empty or there is a matching skill
+        return allProjects.stream().filter(project -> {
+            // Creators shouldn't see their own projects in the recommendations
+            if (project.getOwner().getId().equals(user.getId())) {
+                return false;
+            }
+            String reqs = project.getRequirements();
+            if (reqs == null || reqs.trim().isEmpty()) {
+                return true; // No special requirements
+            }
+            String reqsLower = reqs.toLowerCase();
+            for (String skill : userSkills) {
+                if (!skill.isEmpty() && reqsLower.contains(skill)) {
+                    return true;
+                }
+            }
+            return false;
+        }).collect(java.util.stream.Collectors.toList());
+    }
+
     @GetMapping("/my-projects")
     public List<Project> getMyProjects() {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
